@@ -10,6 +10,55 @@
   <meta name="description" content="The Cumberland Valley Science Olympiad Parent Boosters — supporting our students through donations and fundraising, and our sponsors." />
   <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ---------- Sponsorship levels (boosters page only) ---------- */
+    .tiers { display: grid; gap: 1.25rem; }
+    .tier {
+      display: grid; grid-template-columns: 260px 1fr; gap: 0;
+      background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+      box-shadow: var(--shadow); overflow: hidden;
+    }
+    .tier .tier-head {
+      position: relative; padding: 1.5rem 1.6rem;
+      border-left: 6px solid var(--tier, var(--gold));
+      background: var(--cloud);
+    }
+    .tier .tier-name {
+      display: inline-block; text-transform: uppercase; letter-spacing: .1em;
+      font-size: .82rem; font-weight: 800; color: var(--tier, var(--gold));
+      background: #fff; border: 1px solid var(--line);
+      padding: .25rem .75rem; border-radius: 999px; margin-bottom: .6rem;
+    }
+    .tier .tier-price { font-size: 1.6rem; font-weight: 800; color: var(--maroon-dark); line-height: 1.1; }
+    .tier .tier-desc { color: var(--slate); font-size: .92rem; font-style: italic; margin: .5rem 0 0; }
+    .tier .tier-incl {
+      margin-top: .9rem; text-transform: uppercase; letter-spacing: .04em;
+      font-size: .72rem; font-weight: 700; color: var(--slate);
+    }
+    .tier .tier-benefits { padding: 1.5rem 1.6rem; margin: 0; list-style: none; display: grid; gap: .7rem; }
+    .tier .tier-benefits li { display: flex; gap: .6rem; align-items: flex-start; font-size: .95rem; }
+    .tier .tier-benefits li::before {
+      content: "\2713"; color: var(--tier, var(--gold)); font-weight: 800; flex: none; line-height: 1.5;
+    }
+    .tier .tier-benefits b { color: var(--maroon-dark); }
+    @media (max-width: 720px) {
+      .tier { grid-template-columns: 1fr; }
+      .tier .tier-head { border-left: none; border-top: 6px solid var(--tier, var(--gold)); }
+    }
+
+    /* Event highlight band */
+    .event-band {
+      background: var(--maroon-dark); color: #fff; border-radius: var(--radius);
+      padding: 2rem; box-shadow: var(--shadow-lg); display: flex; gap: 1.2rem; align-items: flex-start;
+    }
+    .event-band .ebadge { font-size: 2.2rem; line-height: 1; flex: none; }
+    .event-band h3 { color: var(--gold-light); margin: 0 0 .5rem; }
+    .event-band p { margin: 0; opacity: .95; }
+    .event-band .hi { color: var(--gold-light); font-weight: 700; }
+    @media (max-width: 560px) { .event-band { flex-direction: column; } }
+
+    .give-note { color: var(--slate); font-size: .9rem; font-style: italic; margin-top: .4rem; }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -32,9 +81,10 @@
 
   <section class="hero compact">
     <div class="wrap">
-      <p class="kicker">Cumberland Valley Science Olympiad</p>
-      <h1>Boosters &amp; Sponsors</h1>
-      <p>Supporting our students through donations and fundraising so our teams can compete throughout the year.</p>
+      <p class="kicker">CVSO Booster Club &bull; 2026&ndash;2027 Season</p>
+      <h1>Become a Sponsor</h1>
+      <p>Support the Eagle Invitational, a premier middle school Science Olympiad tournament held annually at Mountain View Middle School. With approximately 750 attendees each year, your sponsorship provides high-impact brand visibility while fueling student success in STEM.</p>
+      <a class="btn" href="mailto:cvsoboosters24@gmail.com?subject=CVSO%20Booster%20Sponsorship">Email Us to Sponsor</a>
     </div>
   </section>
 
@@ -48,37 +98,143 @@
     </div>
   </section>
 
-  <!-- Sponsorship -->
+  <!-- Sponsorship levels -->
   <section class="section alt" id="sponsor">
     <div class="wrap">
-      <div class="section-head" style="text-align:center; margin-inline:auto;">
+      <div class="section-head">
         <div class="eyebrow">Partner With Us</div>
-        <h2>Sponsorship &amp; Support</h2>
-        <p>Our program is made possible by donations and fundraising. If sponsoring the Cumberland Valley Science Olympiad Parent Boosters is something that interests you or your company, please contact us for more information.</p>
+        <h2>Sponsorship Levels</h2>
+        <p>All contributions directly benefit CVSD student competitors. Each level includes every benefit of the level below it, plus its own.</p>
       </div>
-      <div style="text-align:center;">
-        <a class="btn solid" href="mailto:cvsoboosters24@gmail.com?subject=CVSO%20Booster%20Sponsorship">Email Us to Sponsor</a>
+
+      <div class="tiers">
+        <!-- Platinum -->
+        <div class="tier" style="--tier:#6f5b9e;">
+          <div class="tier-head">
+            <span class="tier-name">Platinum</span>
+            <div class="tier-price">$5,000+</div>
+            <p class="tier-desc">The ultimate level of community leadership and national-level support.</p>
+            <div class="tier-incl">Includes all Gold benefits, plus:</div>
+          </div>
+          <ul class="tier-benefits">
+            <li><span><b>Prominent Branding:</b> Logo featured most prominently on the CVSO website, event programs, and Eagle Invitational T-shirts</span></li>
+            <li><span><b>Active Engagement:</b> Exclusive speaking opportunity at the award ceremony or the honor of presenting tournament trophies</span></li>
+            <li><span><b>Dedicated Recognition:</b> Individual social media spotlight and dedicated thank-you post</span></li>
+            <li><span><b>Lasting Commemoration:</b> Custom team photo plaque and certificate of appreciation</span></li>
+          </ul>
+        </div>
+
+        <!-- Gold -->
+        <div class="tier" style="--tier:#c9a227;">
+          <div class="tier-head">
+            <span class="tier-name">Gold</span>
+            <div class="tier-price">$2,500 &ndash; $4,999</div>
+            <p class="tier-desc">Directly funds an entire tournament's medals, test materials, and supplies.</p>
+            <div class="tier-incl">Includes all Silver benefits, plus:</div>
+          </div>
+          <ul class="tier-benefits">
+            <li><span><b>Large-Scale Visibility:</b> Large logo on the CVSO website and Eagle Invitational T-shirts</span></li>
+            <li><span><b>Dual Recognition:</b> Mentioned during both the Eagle Invitational award ceremony and the CVSO End of Year Celebration</span></li>
+            <li><span><b>Formal Award:</b> Certificate of appreciation</span></li>
+          </ul>
+        </div>
+
+        <!-- Silver -->
+        <div class="tier" style="--tier:#8a8d93;">
+          <div class="tier-head">
+            <span class="tier-name">Silver</span>
+            <div class="tier-price">$1,000 &ndash; $2,499</div>
+            <p class="tier-desc">Your first opportunity for mobile brand exposure via T-shirts. Funds lab kits, building materials, and competition tools.</p>
+            <div class="tier-incl">Includes all Bronze benefits, plus:</div>
+          </div>
+          <ul class="tier-benefits">
+            <li><span><b>T-Shirt Branding:</b> Medium logo on the official Eagle Invitational T-shirts worn by participants</span></li>
+            <li><span><b>Increased Web Presence:</b> Medium logo on the CVSO Booster Club website</span></li>
+            <li><span><b>Social Media:</b> Inclusion in a group thank-you post across social platforms</span></li>
+          </ul>
+        </div>
+
+        <!-- Bronze -->
+        <div class="tier" style="--tier:#a05a2c;">
+          <div class="tier-head">
+            <span class="tier-name">Bronze</span>
+            <div class="tier-price">$500 &ndash; $999</div>
+            <p class="tier-desc">Provides essential support for snacks, team apparel, and volunteer appreciation.</p>
+            <div class="tier-incl">Includes all Community benefits, plus:</div>
+          </div>
+          <ul class="tier-benefits">
+            <li><span><b>Visual Branding:</b> Small logo or name featured on the CVSO Booster Club website</span></li>
+            <li><span><b>Program Recognition:</b> Business officially recognized within the event programs</span></li>
+            <li><span><b>Ceremony Mention:</b> Specific mention in the closing ceremony program</span></li>
+          </ul>
+        </div>
+
+        <!-- Community -->
+        <div class="tier" style="--tier:#2f7d4f;">
+          <div class="tier-head">
+            <span class="tier-name">Community</span>
+            <div class="tier-price">$100 &ndash; $499</div>
+            <p class="tier-desc">Foundational support for printing, safety materials, and student travel.</p>
+          </div>
+          <ul class="tier-benefits">
+            <li><span><b>Website Listing:</b> Name listed on the CVSO Booster Club website</span></li>
+            <li><span><b>Social Media:</b> Included in a social media thank-you</span></li>
+            <li><span><b>On-Site Display:</b> Option to display promotional material at the event <a href="#give">**</a></span></li>
+          </ul>
+        </div>
+
+        <!-- In-Kind -->
+        <div class="tier" style="--tier:#2f6f7d;">
+          <div class="tier-head">
+            <span class="tier-name">In-Kind</span>
+            <div class="tier-price">Value Varies</div>
+            <p class="tier-desc">Recognition tailored to the value of donated goods or services (food, printing, lab materials, etc.).</p>
+          </div>
+          <ul class="tier-benefits">
+            <li><span>Logo or name on the CVSO Booster Club website and event materials</span></li>
+            <li><span>Recognition level matched to the value of the donation</span></li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Ways to give -->
-  <section class="section" id="donate">
+  <!-- Event highlight -->
+  <section class="section">
     <div class="wrap">
-      <div class="section-head">
-        <div class="eyebrow">Every Bit Helps</div>
-        <h2>Ways to Give</h2>
+      <div class="event-band">
+        <div class="ebadge">&#127942;</div>
+        <div>
+          <h3>Eagle Invitational &mdash; February 13, 2027 &bull; Mountain View Middle School</h3>
+          <p>An annual Science Olympiad tournament for middle school teams attended by <span class="hi">approximately 750 people</span> each year &mdash; a prime opportunity for your organization to be seen by the Cumberland Valley community and gain meaningful brand exposure among families, educators, and STEM supporters.</p>
+        </div>
       </div>
-      <div class="grid cols-3">
-        <div class="card"><div class="ico">&#128179;</div><h3>Make a Donation</h3><p>Gifts of any size help. Mail a check to <strong>CV Science Olympiad Parent Boosters, PO Box 5, New Kingstown, PA 17072</strong>, or email us to give online. <span class="placeholder">Add a PayPal/Venmo link here if you have one.</span></p></div>
-        <div class="card"><div class="ico">&#127970;</div><h3>Corporate Matching</h3><p>Many employers match charitable gifts &mdash; ask your HR department to double your impact.</p></div>
-        <div class="card"><div class="ico">&#128230;</div><h3>In-Kind Donations</h3><p>Build materials, lab equipment, snacks for the concession stand, and volunteer time are all welcome.</p></div>
+    </div>
+  </section>
+
+  <!-- Deadline + how to give -->
+  <section class="section alt" id="give">
+    <div class="wrap">
+      <div class="grid cols-2">
+        <div class="card">
+          <div class="ico">&#128197;</div>
+          <h3>Important Deadline</h3>
+          <p>To receive recognition at the Eagle Invitational on <strong>February 13, 2027</strong>, checks must be received by <strong>December 31, 2026</strong>.</p>
+          <p class="give-note">Sponsorships received after January 1, 2027 will receive recognition in 2028.</p>
+        </div>
+        <div class="card">
+          <div class="ico">&#9993;</div>
+          <h3>How to Give</h3>
+          <p><strong>Make checks payable to:</strong> CVSO Boosters</p>
+          <p><strong>Mail to:</strong><br />PO Box 5, New Kingstown<br />Mechanicsburg, PA 17072</p>
+          <p><strong>Inquiries</strong> (** promotional display):<br /><a href="mailto:cvsoboosters24@gmail.com">cvsoboosters24@gmail.com</a></p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Current sponsors -->
-  <section class="section alt">
+  <section class="section">
     <div class="wrap">
       <div class="section-head">
         <div class="eyebrow">Thank You</div>
@@ -92,18 +248,6 @@
         <div class="card" style="text-align:center"><div class="ico" style="margin-inline:auto">&#129309;</div><h3>Sponsor Name</h3></div>
       </div>
       <div class="callout"><span class="notice-badge">To do</span> Replace these placeholder cards with your real sponsors' logos and names. Drop logo images in <code>assets/</code> and swap the icon for an <code>&lt;img&gt;</code>.</div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section class="section">
-    <div class="wrap prose" style="max-width:820px; margin-inline:auto;">
-      <div class="eyebrow">Get in Touch</div>
-      <h2>Contact</h2>
-      <ul>
-        <li><strong>Email:</strong> <a href="mailto:cvsoboosters24@gmail.com">cvsoboosters24@gmail.com</a></li>
-        <li><strong>Mailing Address:</strong> Cumberland Valley Science Olympiad Parent Boosters, PO Box 5, New Kingstown, PA 17072</li>
-      </ul>
     </div>
   </section>
 
@@ -140,6 +284,5 @@
     </div>
   </footer>
   <script src="js/main.js"></script>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
