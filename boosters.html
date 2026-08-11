@@ -58,6 +58,24 @@
     @media (max-width: 560px) { .event-band { flex-direction: column; } }
 
     .give-note { color: var(--slate); font-size: .9rem; font-style: italic; margin-top: .4rem; }
+
+    /* Booster club monthly meetings (placeholder calendar) */
+    .meet-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    @media (max-width: 860px) { .meet-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .meet-grid { grid-template-columns: 1fr; } }
+    .meet {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 1rem 1.2rem;
+    }
+    .meet .m-chip {
+      flex: none; width: 58px; height: 58px; border-radius: 12px; background: var(--maroon);
+      color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.1;
+    }
+    .meet .m-chip .mon { font-size: .78rem; font-weight: 700; text-transform: uppercase; color: var(--gold-light); }
+    .meet .m-chip .yr { font-size: .72rem; opacity: .85; }
+    .meet .m-info strong { display: block; color: var(--maroon-dark); }
+    .meet .m-info .placeholder { font-size: .85rem; }
   </style>
 </head>
 <body>
@@ -111,6 +129,28 @@
         <div class="person"><div class="avatar">KL</div><div class="role">Vice President</div><div class="name">Kislay Lal</div></div>
         <div class="person"><div class="avatar">AS</div><div class="role">Secretary</div><div class="name">Anupam Sharma</div></div>
         <div class="person"><div class="avatar">AA</div><div class="role">Treasurer</div><div class="name">Amit Agarwal</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booster club meetings -->
+  <section class="section alt" id="meetings">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Get Involved</div>
+        <h2>Booster Club Meetings</h2>
+        <p>We meet monthly throughout the season, and all CVSO families are welcome. Dates and times for the 2026&ndash;2027 season are still being finalized &mdash; the schedule below will be updated once confirmed.</p>
+      </div>
+      <div class="meet-grid">
+        <div class="meet"><div class="m-chip"><span class="mon">Sep</span><span class="yr">2026</span></div><div class="m-info"><strong>Monthly Meeting</strong><span class="placeholder">Date &amp; time TBA</span></div></div>
+        <div class="meet"><div class="m-chip"><span class="mon">Oct</span><span class="yr">2026</span></div><div class="m-info"><strong>Monthly Meeting</strong><span class="placeholder">Date &amp; time TBA</span></div></div>
+        <div class="meet"><div class="m-chip"><span class="mon">Nov</span><span class="yr">2026</span></div><div class="m-info"><strong>Monthly Meeting</strong><span class="placeholder">Date &amp; time TBA</span></div></div>
+        <div class="meet"><div class="m-chip"><span class="mon">Dec</span><span class="yr">2026</span></div><div class="m-info"><strong>Monthly Meeting</strong><span class="placeholder">Date &amp; time TBA</span></div></div>
+        <div class="meet"><div class="m-chip"><span class="mon">Jan</span><span class="yr">2027</span></div><div class="m-info"><strong>Monthly Meeting</strong><span class="placeholder">Date &amp; time TBA</span></div></div>
+        <div class="meet"><div class="m-chip"><span class="mon">Feb</span><span class="yr">2027</span></div><div class="m-info"><strong>Monthly Meeting</strong><span class="placeholder">Date &amp; time TBA</span></div></div>
+        <div class="meet"><div class="m-chip"><span class="mon">Mar</span><span class="yr">2027</span></div><div class="m-info"><strong>Monthly Meeting</strong><span class="placeholder">Date &amp; time TBA</span></div></div>
+        <div class="meet"><div class="m-chip"><span class="mon">Apr</span><span class="yr">2027</span></div><div class="m-info"><strong>Monthly Meeting</strong><span class="placeholder">Date &amp; time TBA</span></div></div>
+        <div class="meet"><div class="m-chip"><span class="mon">May</span><span class="yr">2027</span></div><div class="m-info"><strong>Monthly Meeting</strong><span class="placeholder">Date &amp; time TBA</span></div></div>
       </div>
     </div>
   </section>

@@ -69,6 +69,7 @@ h3 { font-size: 1.25rem; color: var(--maroon-dark); }
   box-shadow: 0 2px 14px rgba(0,0,0,.18);
 }
 .nav {
+  position: relative;
   display: flex; align-items: center; justify-content: space-between;
   gap: 1rem; padding: .6rem 0;
 }
@@ -82,11 +83,12 @@ h3 { font-size: 1.25rem; color: var(--maroon-dark); }
 }
 .brand small { display: block; font-weight: 500; font-size: .72rem; opacity: .85; letter-spacing: .02em; }
 .brand-logo {
-  height: 58px; width: auto; display: block;
-  background: #fff; padding: 5px 10px; border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,.18);
+  height: 72px; width: auto; display: block;
+  background: #fff; padding: 7px 13px; border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.3);
+  border: 2px solid var(--gold);
 }
-@media (max-width: 940px) { .brand-logo { height: 46px; } }
+@media (max-width: 940px) { .brand-logo { height: 54px; padding: 5px 10px; } }
 
 .nav-links { display: flex; align-items: center; gap: .2rem; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
 .nav-links a {
@@ -97,19 +99,24 @@ h3 { font-size: 1.25rem; color: var(--maroon-dark); }
 .nav-links a.active { background: var(--gold); color: var(--maroon-dark); }
 
 .nav-toggle {
-  display: none; background: transparent; border: 2px solid rgba(255,255,255,.5);
-  color: #fff; border-radius: 8px; padding: .35rem .6rem; cursor: pointer; font-size: 1.1rem;
+  display: none; align-items: center; gap: .4rem;
+  background: var(--gold); border: 2px solid var(--gold);
+  color: var(--maroon-dark); border-radius: 8px; padding: .45rem .8rem; cursor: pointer;
+  font-size: 1.15rem; font-weight: 800; line-height: 1;
 }
+.nav-toggle::before { content: "Menu"; font-size: .9rem; letter-spacing: .02em; }
 
 @media (max-width: 940px) {
-  .nav-toggle { display: block; }
+  .nav-toggle { display: inline-flex; }
   .nav-links {
-    position: absolute; left: 0; right: 0; top: 100%;
+    position: absolute; left: 0; right: 0; top: calc(100% + .6rem); z-index: 60;
     background: var(--maroon-dark); flex-direction: column; align-items: stretch;
-    gap: 0; padding: .5rem 6%; max-height: 0; overflow: hidden; transition: max-height .3s ease;
+    gap: 0; padding: 0 6%; max-height: 0; overflow: hidden;
+    transition: max-height .3s ease; box-shadow: 0 14px 26px rgba(0,0,0,.3);
+    border-top: 3px solid var(--gold);
   }
-  .nav-links.open { max-height: 640px; padding-block: .6rem; }
-  .nav-links a { padding: .8rem .6rem; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .nav-links.open { max-height: 80vh; overflow-y: auto; padding-block: .6rem; }
+  .nav-links a { padding: .85rem .6rem; border-bottom: 1px solid rgba(255,255,255,.08); font-size: 1rem; }
 }
 
 /* ---------- Hero ---------- */
