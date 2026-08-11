@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-label="Team photo placeholder 3">
+  <defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#4c7d2f"/><stop offset="1" stop-color="#1e370f"/></linearGradient></defs>
+  <rect width="1200" height="675" fill="url(#g3)"/>
+  <circle cx="180" cy="150" r="100" fill="#ffffff" opacity="0.12"/>
+  <circle cx="1020" cy="540" r="120" fill="#c9a227" opacity="0.2"/>
+  <text x="600" y="320" font-family="Segoe UI, Arial, sans-serif" font-size="60" fill="#ffffff" text-anchor="middle" font-weight="700">Build Season</text>
+  <text x="600" y="380" font-family="Segoe UI, Arial, sans-serif" font-size="30" fill="#e6c76a" text-anchor="middle">Replace with assets/slide3.jpg</text>
+</svg>
