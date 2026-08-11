@@ -10,6 +10,29 @@
   <meta name="description" content="Home of Cumberland Valley Science Olympiad — high school and middle school teams, the Eagle Invitational, and the CVSO Parent Boosters." />
   <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ---------- Upcoming competitions calendar (home page only) ---------- */
+    .cal-list { display: grid; gap: 1rem; max-width: 860px; }
+    .cal-event {
+      display: grid; grid-template-columns: 92px 1fr; gap: 1.2rem; align-items: center;
+      background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 1.1rem 1.3rem;
+    }
+    .cal-date {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: var(--maroon); color: #fff; border-radius: 12px; padding: .55rem 0; line-height: 1.1;
+    }
+    .cal-date .mon { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--gold-light); }
+    .cal-date .day { font-size: 1.7rem; font-weight: 800; }
+    .cal-date .yr { font-size: .72rem; opacity: .85; }
+    .cal-info h3 { margin: .15rem 0; }
+    .cal-info p { margin: 0; color: var(--slate); font-size: .95rem; }
+    .cal-tag { display: inline-block; text-transform: uppercase; letter-spacing: .06em; font-size: .7rem; font-weight: 700; color: var(--gold); }
+    @media (max-width: 520px) {
+      .cal-event { grid-template-columns: 66px 1fr; gap: .9rem; padding: 1rem; }
+      .cal-date .day { font-size: 1.4rem; }
+    }
+  </style>
 </head>
 <body>
   <!-- ===== Header ===== -->
@@ -203,6 +226,51 @@
             <span class="tag">Division B</span><span class="tag">Grades 6&ndash;9</span>
           </div>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Upcoming competitions ===== -->
+  <section class="section alt" id="calendar">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Mark Your Calendar</div>
+        <h2>Upcoming Competitions</h2>
+        <p>Where you'll find our teams this season. Dates and locations are subject to change.</p>
+      </div>
+      <div class="cal-list reveal">
+        <div class="cal-event">
+          <div class="cal-date"><span class="mon">Mar</span><span class="day">28</span><span class="yr">2026</span></div>
+          <div class="cal-info">
+            <span class="cal-tag">Regionals</span>
+            <h3>Central Region Tournament</h3>
+            <p>Saturday, March 28, 2026 &bull; Millersville University</p>
+          </div>
+        </div>
+        <div class="cal-event">
+          <div class="cal-date"><span class="mon">Apr</span><span class="day">25</span><span class="yr">2026</span></div>
+          <div class="cal-info">
+            <span class="cal-tag">States</span>
+            <h3>PA State Tournament</h3>
+            <p>April 25, 2026 &bull; Penn State Altoona</p>
+          </div>
+        </div>
+        <div class="cal-event">
+          <div class="cal-date"><span class="mon">Feb</span><span class="day">13</span><span class="yr">2027</span></div>
+          <div class="cal-info">
+            <span class="cal-tag">Eagle Invitational</span>
+            <h3>Eagle Invitational</h3>
+            <p>Saturday, February 13, 2027 &bull; Mountain View Middle School</p>
+          </div>
+        </div>
+        <div class="cal-event">
+          <div class="cal-date"><span class="mon">May</span><span class="day">14</span><span class="yr">2027</span></div>
+          <div class="cal-info">
+            <span class="cal-tag">Nationals</span>
+            <h3>2027 National Tournament</h3>
+            <p>May 14&ndash;15, 2027 &bull; The Ohio State University</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
