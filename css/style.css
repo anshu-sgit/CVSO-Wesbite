@@ -218,6 +218,9 @@ h3 { font-size: 1.25rem; color: var(--maroon-dark); }
   width: 48px; height: 48px; border-radius: 12px; background: var(--cloud-2);
   display: grid; place-items: center; font-size: 1.5rem; margin-bottom: 1rem;
 }
+/* Inline SVG icons (replacing decorative emoji) */
+.ico svg { width: 26px; height: 26px; display: block; }
+.cat-ico svg { width: 32px; height: 32px; display: block; }
 .card.link-card { transition: transform .15s ease, box-shadow .15s ease; }
 .card.link-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
 
