@@ -32,6 +32,30 @@
       .cal-event { grid-template-columns: 66px 1fr; gap: .9rem; padding: 1rem; }
       .cal-date .day { font-size: 1.4rem; }
     }
+
+    /* ---------- 3D spinning tower in the hero (home page only) ---------- */
+    .tower3d {
+      position: absolute; top: 50%; right: 7%; transform: translateY(-50%);
+      width: 120px; height: 320px; perspective: 1000px; z-index: 1; pointer-events: none;
+      filter: drop-shadow(0 18px 26px rgba(0,0,0,.35));
+    }
+    .tower-spin { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; animation: towerSpin 18s linear infinite; }
+    .tower-face {
+      position: absolute; top: 0; left: 50%; margin-left: -50px; width: 100px; height: 320px;
+      border-left: 3px solid var(--gold-light); border-right: 3px solid var(--gold-light);
+      border-top: 3px solid var(--gold); border-bottom: 3px solid var(--gold);
+      background:
+        linear-gradient(45deg, transparent 46%, rgba(230,199,106,.85) 46%, rgba(230,199,106,.85) 54%, transparent 54%),
+        linear-gradient(-45deg, transparent 46%, rgba(230,199,106,.85) 46%, rgba(230,199,106,.85) 54%, transparent 54%);
+      background-size: 100px 64px; background-repeat: repeat-y;
+    }
+    .tf1 { transform: translateZ(50px); }
+    .tf2 { transform: rotateY(90deg) translateZ(50px); }
+    .tf3 { transform: rotateY(180deg) translateZ(50px); }
+    .tf4 { transform: rotateY(270deg) translateZ(50px); }
+    @keyframes towerSpin { to { transform: rotateY(360deg); } }
+    @media (max-width: 1024px) { .tower3d { display: none; } }
+    @media (prefers-reduced-motion: reduce) { .tower-spin { animation: none; transform: rotateY(28deg) rotateX(-6deg); } }
   </style>
 </head>
 <body>
@@ -60,6 +84,14 @@
       <span class="blob b1"></span>
       <span class="blob b2"></span>
       <span class="blob b3"></span>
+    </div>
+    <div class="tower3d" aria-hidden="true">
+      <div class="tower-spin">
+        <span class="tower-face tf1"></span>
+        <span class="tower-face tf2"></span>
+        <span class="tower-face tf3"></span>
+        <span class="tower-face tf4"></span>
+      </div>
     </div>
     <div class="wrap">
       <p class="kicker fade-up">Cumberland Valley School District &bull; Mechanicsburg, PA</p>
@@ -316,6 +348,7 @@
       </div>
       <div class="feature reveal">
         <div class="prose">
+          <img src="assets/photos/jibby.jpg" alt="Jibby Jr, the pink alpaca mascot, posed with two Cumberland Valley Science Olympiad trophies" loading="lazy" onerror="this.style.display='none'" style="border-radius:14px; box-shadow:0 20px 50px rgba(30,20,20,.14); margin-bottom:1.2rem; width:100%;" />
           <p>Jibby Jr joined CVSO in <strong>2019</strong>. He has been to LISO, Battle at Valley Forge, DSM, Solon, MIT, SOUP, North Pocono, SOAPS, CPA, PASO, &amp; Nationals!</p>
           <p>He loves entertaining Division B teams at Eagle Invy and hanging out at the Eagle View and Cumberland Valley team home bases throughout the tournament season.</p>
           <p>He is proud of the Cumberland Valley High School team for qualifying for Nationals <strong>four times</strong>, and of <strong>Eagle View Middle School</strong> for earning a National bid of its own. He's even prouder of his team for winning the <strong>2022 Science Olympiad Spirit Award</strong> at Nationals.</p>
