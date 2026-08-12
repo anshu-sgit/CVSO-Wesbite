@@ -78,3 +78,39 @@
     if (nxt) nxt.addEventListener('click', function () { next(); restart(); });
   }
 })();
+
+// --- Animated particle network for page headers (canvas.hero-net) ---
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  Array.prototype.forEach.call(document.querySelectorAll('canvas.hero-net'), function (cv) {
+    var ctx = cv.getContext && cv.getContext('2d');
+    if (!ctx) return;
+    var rgb = cv.getAttribute('data-rgb') || '240,224,150';
+    var W = 0, H = 0, DPR = 1, N = 0, pts = [];
+    function resize() {
+      DPR = Math.min(window.devicePixelRatio || 1, 2);
+      var r = cv.getBoundingClientRect(); W = r.width; H = r.height;
+      cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      N = Math.max(26, Math.min(80, Math.round(W * H / 12000)));
+      pts = [];
+      for (var i = 0; i < N; i++) pts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .4, vy: (Math.random() - .5) * .4 });
+    }
+    function frame() {
+      ctx.clearRect(0, 0, W, H);
+      for (var i = 0; i < N; i++) {
+        var p = pts[i]; p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > W) p.vx *= -1;
+        if (p.y < 0 || p.y > H) p.vy *= -1;
+        p.x = Math.max(0, Math.min(W, p.x)); p.y = Math.max(0, Math.min(H, p.y));
+      }
+      for (var a = 0; a < N; a++) for (var b = a + 1; b < N; b++) {
+        var pa = pts[a], pb = pts[b], dx = pa.x - pb.x, dy = pa.y - pb.y, dd = dx * dx + dy * dy;
+        if (dd < 11000) { ctx.strokeStyle = 'rgba(' + rgb + ',' + ((1 - dd / 11000) * .32).toFixed(3) + ')'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(pa.x, pa.y); ctx.lineTo(pb.x, pb.y); ctx.stroke(); }
+      }
+      ctx.fillStyle = 'rgba(' + rgb + ',.75)';
+      for (var j = 0; j < N; j++) { ctx.beginPath(); ctx.arc(pts[j].x, pts[j].y, 1.7, 0, 6.283); ctx.fill(); }
+      if (!reduce) requestAnimationFrame(frame);
+    }
+    resize(); window.addEventListener('resize', resize); frame();
+  });
+})();
