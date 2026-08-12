@@ -295,6 +295,8 @@ tbody tr:nth-child(even) { background: var(--cloud); }
   background: var(--maroon); color: #fff; border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow-lg);
 }
 .feature .panel h3 { color: var(--gold-light); }
+.feature .panel a { color: var(--gold-light); text-decoration: underline; }
+.feature .panel a:hover { color: #fff; }
 .feature .panel ul { padding-left: 1.1rem; margin: 0; }
 .feature .panel li { margin: .5rem 0; }
 
