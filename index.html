@@ -43,9 +43,9 @@
     .hero-immersive .hero-canvas { z-index: 1; width: 100%; height: 100%; }
     .hero-aurora {
       background:
-        radial-gradient(40% 50% at 18% 22%, rgba(201,162,39,.4), transparent 70%),
-        radial-gradient(45% 55% at 82% 28%, rgba(138,44,58,.55), transparent 72%),
-        radial-gradient(60% 60% at 50% 92%, rgba(201,162,39,.2), transparent 70%);
+        radial-gradient(40% 50% at 18% 22%, rgba(201,162,39,.26), transparent 70%),
+        radial-gradient(45% 55% at 82% 28%, rgba(138,44,58,.34), transparent 72%),
+        radial-gradient(60% 60% at 50% 92%, rgba(201,162,39,.13), transparent 70%);
       filter: blur(16px); animation: auroraDrift 16s ease-in-out infinite alternate;
     }
     @keyframes auroraDrift {
@@ -56,24 +56,29 @@
     /* graph-paper grid, faded toward the edges */
     .hero-grid-bg {
       background-image:
-        linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
       background-size: 46px 46px;
       -webkit-mask-image: radial-gradient(ellipse 72% 68% at 50% 45%, #000 55%, transparent 100%);
               mask-image: radial-gradient(ellipse 72% 68% at 50% 45%, #000 55%, transparent 100%);
     }
-    /* big centered atom sitting behind the text */
+    /* big centered atom sitting behind the text (kept faint) */
     .hero-atom {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      width: min(700px, 96vw); height: min(700px, 80vh); z-index: 1; pointer-events: none;
+      width: min(720px, 98vw); height: min(720px, 82vh); z-index: 1; pointer-events: none; opacity: .42;
     }
     .hero-atom canvas { width: 100%; height: 100%; display: block; }
+    /* dark scrim over the artwork so the wording stands out */
+    .hero-immersive::after {
+      content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background: radial-gradient(ellipse 65% 60% at 50% 48%, rgba(28,10,12,.5), transparent 78%);
+    }
     /* centered content on top of the artwork */
     .hero-immersive > .wrap { position: relative; z-index: 3; }
-    .hero-copy { max-width: 780px; margin-inline: auto; text-align: center; text-shadow: 0 2px 16px rgba(20,8,10,.5); }
-    .hero-copy .kicker { color: var(--gold-light); }
-    .hero-immersive h1 { font-size: clamp(2.3rem, 6vw, 3.9rem); margin-bottom: .35em; }
-    .hero-immersive p { max-width: 620px; margin-inline: auto; }
+    .hero-copy { max-width: 1000px; margin-inline: auto; text-align: center; text-shadow: 0 2px 18px rgba(16,6,8,.6); }
+    .hero-copy .kicker { color: var(--gold-light); font-size: .92rem; }
+    .hero-immersive h1 { font-size: clamp(2.9rem, 8.5vw, 6rem); line-height: 1.03; margin-bottom: .3em; }
+    .hero-immersive p { max-width: 680px; margin-inline: auto; font-size: clamp(1.05rem, 2.1vw, 1.32rem); }
     .hero-immersive .btn-row { justify-content: center; }
     .hero-immersive .hero-badges {
       display: grid; grid-template-columns: repeat(2, auto);
@@ -476,34 +481,29 @@
     var cv = document.querySelector('.hero-canvas');
     if (cv && cv.getContext) {
       var ctx = cv.getContext('2d'), W = 0, H = 0, DPR = 1, N = 0, pts = [], mouse = { x: -9999, y: -9999 };
-      var host = cv.closest('.hero-immersive');
       function resize() {
         DPR = Math.min(window.devicePixelRatio || 1, 2);
         var r = cv.getBoundingClientRect(); W = r.width; H = r.height;
         cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-        N = Math.max(38, Math.min(85, Math.round(W * H / 17000)));
+        N = Math.max(70, Math.min(170, Math.round(W * H / 8500)));
         pts = [];
-        for (var i = 0; i < N; i++) pts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35 });
-      }
-      if (host) {
-        host.addEventListener('mousemove', function (e) { var r = cv.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
-        host.addEventListener('mouseleave', function () { mouse.x = -9999; mouse.y = -9999; });
+        for (var i = 0; i < N; i++) pts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .42, vy: (Math.random() - .5) * .42 });
       }
       function frame() {
         ctx.clearRect(0, 0, W, H);
         for (var i = 0; i < N; i++) {
-          var p = pts[i], dx = p.x - mouse.x, dy = p.y - mouse.y, d2 = dx * dx + dy * dy;
-          if (d2 < 15000) { var d = Math.sqrt(d2) || 1, f = (15000 - d2) / 15000 * .5; p.vx += dx / d * f; p.vy += dy / d * f; }
-          p.x += p.vx; p.y += p.vy; p.vx *= .97; p.vy *= .97;
-          if (p.x < 0 || p.x > W) p.vx *= -1; if (p.y < 0 || p.y > H) p.vy *= -1;
+          var p = pts[i];
+          p.x += p.vx; p.y += p.vy;                       /* steady drift on its own — no cursor interaction */
+          if (p.x < 0 || p.x > W) p.vx *= -1;
+          if (p.y < 0 || p.y > H) p.vy *= -1;
           p.x = Math.max(0, Math.min(W, p.x)); p.y = Math.max(0, Math.min(H, p.y));
         }
         for (var a = 0; a < N; a++) for (var b = a + 1; b < N; b++) {
           var pa = pts[a], pb = pts[b], ddx = pa.x - pb.x, ddy = pa.y - pb.y, dd = ddx * ddx + ddy * ddy;
-          if (dd < 9500) { ctx.strokeStyle = 'rgba(230,199,106,' + ((1 - dd / 9500) * .45).toFixed(3) + ')'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(pa.x, pa.y); ctx.lineTo(pb.x, pb.y); ctx.stroke(); }
+          if (dd < 13000) { ctx.strokeStyle = 'rgba(233,205,120,' + ((1 - dd / 13000) * .4).toFixed(3) + ')'; ctx.lineWidth = 1.1; ctx.beginPath(); ctx.moveTo(pa.x, pa.y); ctx.lineTo(pb.x, pb.y); ctx.stroke(); }
         }
-        ctx.fillStyle = 'rgba(240,222,150,.92)';
-        for (var j = 0; j < N; j++) { ctx.beginPath(); ctx.arc(pts[j].x, pts[j].y, 1.7, 0, 6.283); ctx.fill(); }
+        ctx.fillStyle = 'rgba(243,226,158,.82)';
+        for (var j = 0; j < N; j++) { ctx.beginPath(); ctx.arc(pts[j].x, pts[j].y, 2, 0, 6.283); ctx.fill(); }
         if (!reduce) requestAnimationFrame(frame);
       }
       resize(); window.addEventListener('resize', resize); frame();
@@ -521,7 +521,7 @@
       // soft nucleus glow
       grp.add(new THREE.Mesh(new THREE.SphereGeometry(1.1, 24, 24), new THREE.MeshBasicMaterial({ color: 0xc9a227, transparent: true, opacity: .14 })));
       // --- 3D truss tower spinning at the atom's core ---
-      var towerMat = new THREE.MeshStandardMaterial({ color: 0xe6c76a, emissive: 0xc9a227, emissiveIntensity: .5, roughness: .3, metalness: .7 });
+      var towerMat = new THREE.MeshStandardMaterial({ color: 0xe0c9a0, emissive: 0xc9a227, emissiveIntensity: .3, roughness: .55, metalness: .25 });
       var tower = new THREE.Group(); grp.add(tower);
       var UP = new THREE.Vector3(0, 1, 0);
       function strut(a, b, th) {
@@ -531,11 +531,16 @@
         m.quaternion.setFromUnitVectors(UP, dir.normalize());
         tower.add(m);
       }
-      var TH = 3.0, HS = 0.5, NS = 5, SEG = TH / NS, TT = 0.05, sg = [[1, 1], [1, -1], [-1, -1], [-1, 1]];
-      function cor(l, c) { return new THREE.Vector3(sg[c][0] * HS, -TH / 2 + l * SEG, sg[c][1] * HS); }
-      for (var l = 0; l < NS; l++) for (var c = 0; c < 4; c++) strut(cor(l, c), cor(l + 1, c), TT);            // legs
-      for (var l = 0; l <= NS; l++) for (var c = 0; c < 4; c++) strut(cor(l, c), cor(l, (c + 1) % 4), TT);      // rungs
-      for (var l = 0; l < NS; l++) for (var c = 0; c < 4; c++) strut(cor(l, c), cor(l + 1, (c + 1) % 4), TT * .8); // diagonal braces
+      // tapered square lattice: wide base narrowing to a small top, with X cross-braces per panel
+      var TH = 3.4, HB = 0.72, HTOP = 0.16, NS = 6, SEG = TH / NS, TT = 0.045, sg = [[1, 1], [1, -1], [-1, -1], [-1, 1]];
+      function halfAt(l) { return HB + (HTOP - HB) * (l / NS); }
+      function cor(l, c) { var h = halfAt(l); return new THREE.Vector3(sg[c][0] * h, -TH / 2 + l * SEG, sg[c][1] * h); }
+      for (var l = 0; l < NS; l++) for (var c = 0; c < 4; c++) strut(cor(l, c), cor(l + 1, c), TT);              // legs
+      for (var l = 0; l <= NS; l++) for (var c = 0; c < 4; c++) strut(cor(l, c), cor(l, (c + 1) % 4), TT * .85);  // horizontal rungs
+      for (var l = 0; l < NS; l++) for (var c = 0; c < 4; c++) {                                                 // X cross-braces
+        strut(cor(l, c), cor(l + 1, (c + 1) % 4), TT * .7);
+        strut(cor(l, (c + 1) % 4), cor(l + 1, c), TT * .7);
+      }
       // --- electron rings orbiting the tower ---
       var ringMat = new THREE.MeshStandardMaterial({ color: 0xc9a227, emissive: 0xc9a227, emissiveIntensity: .35, roughness: .3, metalness: .6 });
       var eMat = new THREE.MeshStandardMaterial({ color: 0xf4e4a8, emissive: 0xe6c76a, emissiveIntensity: .9 });
