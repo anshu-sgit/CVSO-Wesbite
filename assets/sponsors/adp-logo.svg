@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 100" role="img" aria-label="ADP Realty &amp; Property Management">
+  <g fill="#55b389">
+    <polygon points="22,2 56,2 40,66 6,66"/>
+    <polygon points="52,18 86,18 70,82 36,82"/>
+    <polygon points="82,34 116,34 100,98 66,98"/>
+  </g>
+  <g fill="#ededed" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="30" text-anchor="middle">
+    <text x="31" y="34" dominant-baseline="central">A</text>
+    <text x="61" y="50" dominant-baseline="central">D</text>
+    <text x="91" y="66" dominant-baseline="central">P</text>
+  </g>
+</svg>
