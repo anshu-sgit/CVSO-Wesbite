@@ -135,6 +135,67 @@ h3 { font-size: 1.25rem; color: var(--maroon-dark); }
   color: var(--gold-light); margin-bottom: 1rem;
 }
 
+/* ---------- Per-page hero themes (unique color + background per tab) ---------- */
+/* High School — engineering circuit board (crimson) */
+.hero-hs {
+  background-color: #5a1823;
+  background-image:
+    linear-gradient(90deg, rgba(230,199,106,.09) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(230,199,106,.09) 1px, transparent 1px),
+    radial-gradient(circle at 23px 23px, rgba(230,199,106,.32) 2px, transparent 2.6px),
+    linear-gradient(135deg, #4c141d, #7c1f2c);
+  background-size: 46px 46px, 46px 46px, 46px 46px, 100% 100%;
+}
+/* Middle Schools — triangular science mesh (teal) */
+.hero-ms {
+  background-color: #235863;
+  background-image:
+    linear-gradient(60deg, rgba(255,255,255,.07) 1px, transparent 1px),
+    linear-gradient(-60deg, rgba(255,255,255,.07) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(135deg, #123b45, #2f6f7d);
+  background-size: 42px 72px, 42px 72px, 42px 72px, 100% 100%;
+}
+/* Eagle Invitational — award spotlight rays (amber/bronze) */
+.hero-eagle {
+  background-color: #6a4a15;
+  background-image:
+    repeating-conic-gradient(from 0deg at 50% -18%, rgba(255,231,163,.07) 0deg 5deg, transparent 5deg 11deg),
+    radial-gradient(ellipse 70% 90% at 50% 0%, rgba(255,220,140,.18), transparent 60%),
+    linear-gradient(135deg, #43300d, #7a5a17);
+}
+/* Board & Coaches — leadership network (plum) */
+.hero-board {
+  background-color: #4a2156;
+  background-image:
+    radial-gradient(circle at 20px 20px, rgba(230,199,106,.3) 2px, transparent 2.6px),
+    linear-gradient(45deg, rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(-45deg, rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(135deg, #351641, #5f2c70);
+  background-size: 40px 40px, 40px 40px, 40px 40px, 100% 100%;
+}
+/* Alumni — constellation / starfield (indigo) */
+.hero-alumni {
+  background-color: #23305a;
+  background-image:
+    radial-gradient(1.5px 1.5px at 15% 30%, rgba(255,255,255,.6), transparent),
+    radial-gradient(1.5px 1.5px at 65% 20%, rgba(230,199,106,.6), transparent),
+    radial-gradient(2px 2px at 40% 72%, rgba(255,255,255,.5), transparent),
+    radial-gradient(1.5px 1.5px at 82% 60%, rgba(255,255,255,.5), transparent),
+    radial-gradient(1.5px 1.5px at 27% 82%, rgba(230,199,106,.5), transparent),
+    radial-gradient(2px 2px at 90% 33%, rgba(255,255,255,.45), transparent),
+    linear-gradient(135deg, #182146, #2b3a67);
+}
+/* Boosters & Sponsors — supportive weave (green) */
+.hero-boost {
+  background-color: #245c3a;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(255,255,255,.045) 0 2px, transparent 2px 16px),
+    radial-gradient(circle at 24px 24px, rgba(230,199,106,.22) 1.6px, transparent 2px),
+    linear-gradient(135deg, #123a24, #2f7d4f);
+  background-size: 100% 100%, 48px 48px, 100% 100%;
+}
+
 /* ---------- Animated home hero ---------- */
 .hero-home { position: relative; overflow: hidden; padding: 6rem 0 5rem; }
 .hero-home > .wrap { position: relative; z-index: 2; }
