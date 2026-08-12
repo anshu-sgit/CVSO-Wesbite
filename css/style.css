@@ -134,6 +134,10 @@ h3 { font-size: 1.25rem; color: var(--maroon-dark); }
   text-transform: uppercase; letter-spacing: .2em; font-size: .8rem; font-weight: 700;
   color: var(--gold-light); margin-bottom: 1rem;
 }
+/* animated particle-network layer over the page headers */
+.hero { overflow: hidden; }
+.hero-net { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.hero > .wrap { position: relative; z-index: 1; }
 
 /* ---------- Per-page hero themes (unique color + background per tab) ---------- */
 /* High School — engineering circuit board (crimson) */
@@ -294,9 +298,9 @@ h3 { font-size: 1.25rem; color: var(--maroon-dark); }
 .team-card.mv .bar { background: #4c7d2f; }
 
 /* ---------- People (board/coaches) ---------- */
-.people { display: grid; gap: 1.4rem; grid-template-columns: repeat(3, 1fr); }
-@media (max-width: 860px) { .people { grid-template-columns: repeat(2,1fr); } }
-@media (max-width: 560px) { .people { grid-template-columns: 1fr; } }
+.people { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem 1.3rem; }
+.people .person { width: 150px; }
+.people .avatar { width: 76px; height: 76px; margin-bottom: .5rem; font-size: 1.55rem; }
 .person { text-align: center; }
 .person .avatar {
   width: 96px; height: 96px; border-radius: 50%; margin: 0 auto .8rem;
