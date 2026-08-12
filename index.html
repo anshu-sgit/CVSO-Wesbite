@@ -33,15 +33,19 @@
       .cal-date .day { font-size: 1.4rem; }
     }
 
-    /* ---------- Immersive home hero ---------- */
-    .hero-immersive { position: relative; overflow: hidden; padding: 6.5rem 0 5.5rem; }
+    /* ---------- Immersive home hero (centered) ---------- */
+    .hero-immersive { position: relative; overflow: hidden; padding: 7rem 0 6rem; text-align: center; }
     .hero-immersive .hero-aurora,
-    .hero-immersive .hero-canvas { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+    .hero-immersive .hero-grid-bg,
+    .hero-immersive .hero-canvas { position: absolute; inset: 0; pointer-events: none; }
+    .hero-immersive .hero-aurora { z-index: 0; }
+    .hero-immersive .hero-grid-bg { z-index: 0; }
+    .hero-immersive .hero-canvas { z-index: 1; width: 100%; height: 100%; }
     .hero-aurora {
       background:
-        radial-gradient(40% 50% at 18% 25%, rgba(201,162,39,.42), transparent 70%),
-        radial-gradient(45% 55% at 82% 30%, rgba(138,44,58,.6), transparent 72%),
-        radial-gradient(55% 60% at 62% 88%, rgba(201,162,39,.22), transparent 70%);
+        radial-gradient(40% 50% at 18% 22%, rgba(201,162,39,.4), transparent 70%),
+        radial-gradient(45% 55% at 82% 28%, rgba(138,44,58,.55), transparent 72%),
+        radial-gradient(60% 60% at 50% 92%, rgba(201,162,39,.2), transparent 70%);
       filter: blur(16px); animation: auroraDrift 16s ease-in-out infinite alternate;
     }
     @keyframes auroraDrift {
@@ -49,15 +53,32 @@
       50%  { transform: translate3d(3%, 2%, 0) scale(1.12); opacity: 1; }
       100% { transform: translate3d(-1%, 3%, 0) scale(1.06); opacity: .92; }
     }
-    .hero-canvas { width: 100%; height: 100%; }
-    .hero-immersive > .wrap { position: relative; z-index: 2; }
-    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 2rem; }
-    .hero-copy { text-align: left; }
+    /* graph-paper grid, faded toward the edges */
+    .hero-grid-bg {
+      background-image:
+        linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px);
+      background-size: 46px 46px;
+      -webkit-mask-image: radial-gradient(ellipse 72% 68% at 50% 45%, #000 55%, transparent 100%);
+              mask-image: radial-gradient(ellipse 72% 68% at 50% 45%, #000 55%, transparent 100%);
+    }
+    /* big centered atom sitting behind the text */
+    .hero-atom {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: min(700px, 96vw); height: min(700px, 80vh); z-index: 1; pointer-events: none;
+    }
+    .hero-atom canvas { width: 100%; height: 100%; display: block; }
+    /* centered content on top of the artwork */
+    .hero-immersive > .wrap { position: relative; z-index: 3; }
+    .hero-copy { max-width: 780px; margin-inline: auto; text-align: center; text-shadow: 0 2px 16px rgba(20,8,10,.5); }
     .hero-copy .kicker { color: var(--gold-light); }
-    .hero-immersive h1 { font-size: clamp(2.2rem, 5.5vw, 3.6rem); margin-bottom: .35em; }
-    .hero-immersive p { max-width: 560px; margin-left: 0; margin-right: 0; }
-    .hero-immersive .btn-row,
-    .hero-immersive .hero-badges { justify-content: flex-start; }
+    .hero-immersive h1 { font-size: clamp(2.3rem, 6vw, 3.9rem); margin-bottom: .35em; }
+    .hero-immersive p { max-width: 620px; margin-inline: auto; }
+    .hero-immersive .btn-row { justify-content: center; }
+    .hero-immersive .hero-badges {
+      display: grid; grid-template-columns: repeat(2, auto);
+      justify-content: center; justify-items: center; gap: .6rem; max-width: 660px; margin-inline: auto;
+    }
     .hero-immersive .hero-badges .badge svg { width: 1.05em; height: 1.05em; vertical-align: -.16em; margin-right: .3em; color: var(--gold-light); }
     /* shimmering gold headline */
     .shimmer {
@@ -67,21 +88,9 @@
       animation: shimmer 5.5s linear infinite;
     }
     @keyframes shimmer { to { background-position: -220% 0; } }
-    /* 3D atom */
-    .hero-atom { position: relative; width: 100%; height: 420px; justify-self: center; }
-    .hero-atom canvas { width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
-    .hero-atom canvas:active { cursor: grabbing; }
-    .hero-atom .hint {
-      position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%);
-      font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.55);
-      pointer-events: none;
-    }
-    @media (max-width: 900px) {
-      .hero-grid { grid-template-columns: 1fr; text-align: center; }
-      .hero-copy { text-align: center; }
-      .hero-immersive p { margin-inline: auto; }
-      .hero-immersive .btn-row, .hero-immersive .hero-badges { justify-content: center; }
-      .hero-atom { height: 300px; max-width: 340px; margin-inline: auto; }
+    @media (max-width: 620px) {
+      .hero-immersive .hero-badges { grid-template-columns: 1fr; max-width: 340px; }
+      .hero-atom { width: 116vw; height: 62vh; }
     }
     @media (prefers-reduced-motion: reduce) { .hero-aurora, .shimmer { animation: none; } }
   </style>
@@ -106,11 +115,13 @@
     </div>
   </header>
 
-  <!-- ===== Hero (immersive) ===== -->
+  <!-- ===== Hero (immersive, centered) ===== -->
   <section class="hero hero-home hero-immersive">
     <div class="hero-aurora" aria-hidden="true"></div>
+    <div class="hero-grid-bg" aria-hidden="true"></div>
     <canvas class="hero-canvas" aria-hidden="true"></canvas>
-    <div class="wrap hero-grid">
+    <div class="hero-atom" aria-hidden="true"><canvas class="atom-canvas"></canvas></div>
+    <div class="wrap">
       <div class="hero-copy">
         <p class="kicker fade-up">Cumberland Valley School District &bull; Mechanicsburg, PA</p>
         <h1 class="fade-up d1">Cumberland Valley<br /><span class="shimmer">Science Olympiad</span></h1>
@@ -126,10 +137,6 @@
           <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.9l-5.25 2.7 1-5.85L3.5 9.7l5.9-.9z"/></svg><b>2022</b> National Spirit Award</span>
           <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.35-9.2-8.3C1.4 9 2.3 5.8 5.2 5.1 7 4.7 8.8 5.6 12 8c3.2-2.4 5-3.3 6.8-2.9 2.9.7 3.8 3.9 2.4 6.6C19 15.65 12 20 12 20Z"/></svg>Home of <b>Jibby Jr</b></span>
         </div>
-      </div>
-      <div class="hero-atom fade-up d3" aria-hidden="true">
-        <canvas class="atom-canvas"></canvas>
-        <span class="hint">Drag to spin</span>
       </div>
     </div>
     <a href="#what" class="scroll-cue" aria-label="Scroll down">&#8964;</a>
@@ -506,18 +513,35 @@
     var atomCanvas = document.querySelector('.atom-canvas');
     if (atomCanvas && window.THREE) {
       var scene = new THREE.Scene();
-      var cam = new THREE.PerspectiveCamera(45, 1, .1, 100); cam.position.set(0, 0, 7.5);
+      var cam = new THREE.PerspectiveCamera(45, 1, .1, 100); cam.position.set(0, 0, 7);
       var rnd = new THREE.WebGLRenderer({ canvas: atomCanvas, antialias: true, alpha: true });
       rnd.setClearColor(0x000000, 0);
       function rsize() { var r = atomCanvas.getBoundingClientRect(); rnd.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2)); rnd.setSize(r.width, r.height, false); cam.aspect = r.width / (r.height || 1); cam.updateProjectionMatrix(); }
       var grp = new THREE.Group(); scene.add(grp);
-      grp.add(new THREE.Mesh(new THREE.SphereGeometry(.85, 32, 32), new THREE.MeshStandardMaterial({ color: 0x8a2c3a, emissive: 0x6b1f2a, emissiveIntensity: .5, roughness: .35, metalness: .45 })));
-      grp.add(new THREE.Mesh(new THREE.SphereGeometry(1.18, 24, 24), new THREE.MeshBasicMaterial({ color: 0xc9a227, transparent: true, opacity: .16 })));
+      // soft nucleus glow
+      grp.add(new THREE.Mesh(new THREE.SphereGeometry(1.1, 24, 24), new THREE.MeshBasicMaterial({ color: 0xc9a227, transparent: true, opacity: .14 })));
+      // --- 3D truss tower spinning at the atom's core ---
+      var towerMat = new THREE.MeshStandardMaterial({ color: 0xe6c76a, emissive: 0xc9a227, emissiveIntensity: .5, roughness: .3, metalness: .7 });
+      var tower = new THREE.Group(); grp.add(tower);
+      var UP = new THREE.Vector3(0, 1, 0);
+      function strut(a, b, th) {
+        var dir = new THREE.Vector3().subVectors(b, a), len = dir.length();
+        var m = new THREE.Mesh(new THREE.BoxGeometry(th, len, th), towerMat);
+        m.position.copy(a).add(b).multiplyScalar(.5);
+        m.quaternion.setFromUnitVectors(UP, dir.normalize());
+        tower.add(m);
+      }
+      var TH = 3.0, HS = 0.5, NS = 5, SEG = TH / NS, TT = 0.05, sg = [[1, 1], [1, -1], [-1, -1], [-1, 1]];
+      function cor(l, c) { return new THREE.Vector3(sg[c][0] * HS, -TH / 2 + l * SEG, sg[c][1] * HS); }
+      for (var l = 0; l < NS; l++) for (var c = 0; c < 4; c++) strut(cor(l, c), cor(l + 1, c), TT);            // legs
+      for (var l = 0; l <= NS; l++) for (var c = 0; c < 4; c++) strut(cor(l, c), cor(l, (c + 1) % 4), TT);      // rungs
+      for (var l = 0; l < NS; l++) for (var c = 0; c < 4; c++) strut(cor(l, c), cor(l + 1, (c + 1) % 4), TT * .8); // diagonal braces
+      // --- electron rings orbiting the tower ---
       var ringMat = new THREE.MeshStandardMaterial({ color: 0xc9a227, emissive: 0xc9a227, emissiveIntensity: .35, roughness: .3, metalness: .6 });
       var eMat = new THREE.MeshStandardMaterial({ color: 0xf4e4a8, emissive: 0xe6c76a, emissiveIntensity: .9 });
-      var R = 2.25, electrons = [], orient = [[0, 0, 0], [Math.PI / 3, Math.PI / 4, 0], [-Math.PI / 3, -Math.PI / 4, 0]];
+      var R = 2.5, electrons = [], orient = [[0, 0, 0], [Math.PI / 3, Math.PI / 4, 0], [-Math.PI / 3, -Math.PI / 4, 0]];
       for (var k = 0; k < 3; k++) {
-        var ring = new THREE.Mesh(new THREE.TorusGeometry(R, .03, 12, 120), ringMat);
+        var ring = new THREE.Mesh(new THREE.TorusGeometry(R, .03, 12, 140), ringMat);
         ring.rotation.set(orient[k][0], orient[k][1], orient[k][2]); grp.add(ring);
         var e = new THREE.Mesh(new THREE.SphereGeometry(.16, 16, 16), eMat); grp.add(e);
         electrons.push({ mesh: e, ring: ring, phase: Math.random() * 6.283, speed: 1.0 + Math.random() * .7 });
@@ -525,20 +549,17 @@
       scene.add(new THREE.AmbientLight(0xffffff, .55));
       var pl = new THREE.PointLight(0xffd97a, 1.2); pl.position.set(4, 4, 6); scene.add(pl);
       var pl2 = new THREE.PointLight(0xff8a9a, .5); pl2.position.set(-5, -3, 2); scene.add(pl2);
-      var dragging = false, lastX = 0, lastY = 0, velX = 0, velY = 0, auto = .004;
-      atomCanvas.addEventListener('pointerdown', function (e) { dragging = true; lastX = e.clientX; lastY = e.clientY; try { atomCanvas.setPointerCapture(e.pointerId); } catch (x) {} });
-      atomCanvas.addEventListener('pointermove', function (e) { if (!dragging) return; velY = (e.clientX - lastX) * .006; velX = (e.clientY - lastY) * .006; grp.rotation.y += velY; grp.rotation.x += velX; lastX = e.clientX; lastY = e.clientY; });
-      function endDrag() { dragging = false; }
-      atomCanvas.addEventListener('pointerup', endDrag); atomCanvas.addEventListener('pointercancel', endDrag);
-      var t = 0;
+      function place() { for (var i = 0; i < electrons.length; i++) { var el = electrons[i], ang = el.phase + tGlobal * el.speed; var v = new THREE.Vector3(Math.cos(ang) * R, Math.sin(ang) * R, 0); v.applyEuler(el.ring.rotation); el.mesh.position.copy(v); } }
+      var tGlobal = 0;
       function loop() {
-        requestAnimationFrame(loop); t += .016;
-        if (!dragging) { grp.rotation.y += auto + velY; grp.rotation.x += velX; velY *= .95; velX *= .95; }
-        for (var i = 0; i < electrons.length; i++) { var el = electrons[i], ang = el.phase + t * el.speed; var v = new THREE.Vector3(Math.cos(ang) * R, Math.sin(ang) * R, 0); v.applyEuler(el.ring.rotation); el.mesh.position.copy(v); }
+        requestAnimationFrame(loop); tGlobal += .016;
+        grp.rotation.y += .003; grp.rotation.x = Math.sin(tGlobal * .2) * .12;
+        tower.rotation.y += .02;
+        place();
         rnd.render(scene, cam);
       }
       rsize(); window.addEventListener('resize', rsize);
-      if (reduce) { grp.rotation.set(.3, .5, 0); for (var i = 0; i < electrons.length; i++) { var el = electrons[i], v = new THREE.Vector3(Math.cos(el.phase) * R, Math.sin(el.phase) * R, 0); v.applyEuler(el.ring.rotation); el.mesh.position.copy(v); } rnd.render(scene, cam); }
+      if (reduce) { grp.rotation.set(.2, .5, 0); tower.rotation.y = .5; place(); rnd.render(scene, cam); }
       else { loop(); }
     }
   })();
